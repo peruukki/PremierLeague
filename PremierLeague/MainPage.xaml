@@ -8,10 +8,29 @@
     mc:Ignorable="d">
 
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-    	<Grid.RowDefinitions>
+        <Grid.Resources>
+            <CollectionViewSource x:Name="groupData" IsSourceGrouped="true" ItemsPath="Items"/>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
     		<RowDefinition Height="Auto"/>
     		<RowDefinition/>
     	</Grid.RowDefinitions>
     	<TextBlock TextWrapping="Wrap" Text="Premier League" Style="{StaticResource PageHeaderTextStyle}" Margin="20"/>
+        <GridView Grid.Row="1" Margin="20" ItemsSource="{Binding Source={StaticResource groupData}}">
+            <GridView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Key}" />
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </GridView.GroupStyle>
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" Style="{StaticResource ItemTextStyle}" Width="200" Margin="10" />
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
     </Grid>
 </Page>

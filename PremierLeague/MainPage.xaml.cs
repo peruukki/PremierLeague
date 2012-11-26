@@ -33,6 +33,11 @@ namespace PremierLeague
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            var teams = new Data.DataSource().Items;
+            var result = from t in teams
+                         group t by t.Name into g
+                         select new { Key = g.Key, Items = g }; ;
+            groupData.Source = result;
         }
     }
 }
