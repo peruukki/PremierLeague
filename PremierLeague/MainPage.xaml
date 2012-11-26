@@ -7,5 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}"/>
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+    	<Grid.RowDefinitions>
+    		<RowDefinition Height="Auto"/>
+    		<RowDefinition/>
+    	</Grid.RowDefinitions>
+    	<TextBlock TextWrapping="Wrap" Text="Premier League" Style="{StaticResource PageHeaderTextStyle}" Margin="20"/>
+    </Grid>
 </Page>
