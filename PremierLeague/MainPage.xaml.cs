@@ -35,7 +35,8 @@ namespace PremierLeague
         {
             var teams = new Data.DataSource().Items;
             var result = from t in teams
-                         group t by GetGroupName(t.FFTPrediction) into g
+                         orderby t.CurrentPosition
+                         group t by GetGroupName(t.CurrentPosition) into g
                          select new { Key = g.Key, Items = g }; ;
             groupData.Source = result;
         }
