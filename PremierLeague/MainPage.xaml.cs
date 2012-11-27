@@ -35,9 +35,18 @@ namespace PremierLeague
         {
             var teams = new Data.DataSource().Items;
             var result = from t in teams
-                         group t by t.Name into g
+                         group t by GetGroupName(t.FFTPrediction) into g
                          select new { Key = g.Key, Items = g }; ;
             groupData.Source = result;
+        }
+
+        private string GetGroupName(int prediction)
+        {
+            if (prediction <= 4) return "Top four";
+            else if (prediction <= 8) return "Near euro spot";
+            else if (prediction <= 12) return "Midtable";
+            else if (prediction <= 16) return "Safe";
+            else return "Relegation battle";
         }
     }
 }
