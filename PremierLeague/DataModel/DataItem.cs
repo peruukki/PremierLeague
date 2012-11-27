@@ -10,5 +10,7 @@
 
         public string Name { get; private set; }
         public int FFTPrediction { get; private set; }
+
+        public string FFTPredictionText { get { return "FFT: " + FFTPrediction; } }
     }
 }

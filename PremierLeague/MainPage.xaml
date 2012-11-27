@@ -16,7 +16,8 @@
     		<RowDefinition/>
     	</Grid.RowDefinitions>
     	<TextBlock TextWrapping="Wrap" Text="Premier League" Style="{StaticResource PageHeaderTextStyle}" Margin="20"/>
-        <GridView Grid.Row="1" Margin="20" ItemsSource="{Binding Source={StaticResource groupData}}">
+        <GridView Grid.Row="1" Margin="20" ItemsSource="{Binding Source={StaticResource groupData}}"
+                  SelectionMode="None">
             <GridView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
@@ -28,7 +29,12 @@
             </GridView.GroupStyle>
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}" Style="{StaticResource ItemTextStyle}" Width="200" Margin="10" />
+                    <Grid HorizontalAlignment="Left" Width="250" Height="150">
+                        <StackPanel VerticalAlignment="Center" Background="{StaticResource ListViewItemOverlayBackgroundThemeBrush}">
+                            <TextBlock Text="{Binding Name}" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Height="60" Margin="15,0,15,0"/>
+                            <TextBlock Text="{Binding FFTPredictionText}" Foreground="{StaticResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap" Margin="15,0,15,10"/>
+                        </StackPanel>
+                    </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
