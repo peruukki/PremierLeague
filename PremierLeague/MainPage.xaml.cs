@@ -37,7 +37,7 @@ namespace PremierLeague
             var result = from t in teams
                          orderby t.PositionDifference descending
                          group t by GetGroupName(t.PositionDifference) into g
-                         select new { Key = g.Key, Items = g }; ;
+                         select new { Key = string.Format("{0} ({1})", g.Key, g.ToList().Count), Items = g }; ;
             groupData.Source = result;
         }
 
