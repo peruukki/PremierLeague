@@ -35,19 +35,19 @@ namespace PremierLeague
         {
             var teams = new Data.DataSource().Items;
             var result = from t in teams
-                         orderby t.CurrentPosition
-                         group t by GetGroupName(t.CurrentPosition) into g
+                         orderby t.PositionDifference descending
+                         group t by GetGroupName(t.PositionDifference) into g
                          select new { Key = g.Key, Items = g }; ;
             groupData.Source = result;
         }
 
-        private string GetGroupName(int prediction)
+        private string GetGroupName(int difference)
         {
-            if (prediction <= 4) return "Top four";
-            else if (prediction <= 8) return "Near euro spot";
-            else if (prediction <= 12) return "Midtable";
-            else if (prediction <= 16) return "Safe";
-            else return "Relegation battle";
+            if (difference > 4) return "Fantastic season";
+            else if (difference > 1) return "Exceeding expectations";
+            else if (difference < -4) return "Nightmare season";
+            else if (difference < -1) return "Disappointing";
+            else return "Doing OK";
         }
     }
 }
