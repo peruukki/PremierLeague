@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Style="{StaticResource LayoutRootStyle}">
         <Grid.Resources>
             <CollectionViewSource x:Name="groupData" IsSourceGrouped="true" ItemsPath="Items"/>
         </Grid.Resources>
@@ -16,8 +16,16 @@
     		<RowDefinition/>
     	</Grid.RowDefinitions>
     	<TextBlock TextWrapping="Wrap" Text="Premier League" Style="{StaticResource PageHeaderTextStyle}" Margin="20"/>
+
         <GridView Grid.Row="1" Margin="20" ItemsSource="{Binding Source={StaticResource groupData}}"
                   SelectionMode="None">
+
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+
             <GridView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
@@ -25,8 +33,14 @@
                             <TextBlock Text="{Binding Key}" />
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
+                    <GroupStyle.Panel>
+                        <ItemsPanelTemplate>
+                            <VariableSizedWrapGrid Orientation="Vertical" Margin="0,0,40,0"/>
+                        </ItemsPanelTemplate>
+                    </GroupStyle.Panel>
                 </GroupStyle>
             </GridView.GroupStyle>
+
             <GridView.ItemTemplate>
                 <DataTemplate>
                     <Grid HorizontalAlignment="Left" Width="250" Height="150">
