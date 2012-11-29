@@ -43,11 +43,11 @@
 
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Grid HorizontalAlignment="Left" Width="250" Height="150">
-                        <StackPanel VerticalAlignment="Center" Background="{StaticResource ListViewItemOverlayBackgroundThemeBrush}">
-                            <TextBlock Text="{Binding Name}" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Height="60" Margin="15,0,15,0"/>
-                            <TextBlock Text="{Binding CurrentPosition}" Foreground="{StaticResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap" Margin="15,0,15,10"/>
-                            <TextBlock Text="{Binding FFTPredictionText}" Foreground="{StaticResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap" Margin="15,0,15,10"/>
+                    <Grid HorizontalAlignment="Left" Width="150" Height="150">
+                        <StackPanel VerticalAlignment="Stretch" Background="{StaticResource ListViewItemOverlayBackgroundThemeBrush}">
+                            <TextBlock Text="{Binding Name}" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Margin="20"/>
+                            <TextBlock Text="{Binding CurrentPosition}" Foreground="{StaticResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap" Margin="20,0,20,0"/>
+                            <TextBlock Text="{Binding FFTPredictionText}" Foreground="{StaticResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap" Margin="20,0,20,0"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
