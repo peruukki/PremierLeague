@@ -15,7 +15,6 @@
     		<RowDefinition Height="Auto"/>
     		<RowDefinition/>
     	</Grid.RowDefinitions>
-    	<TextBlock TextWrapping="Wrap" Text="Premier League" Style="{StaticResource PageHeaderTextStyle}" Margin="20"/>
 
         <GridView Grid.Row="1" Margin="20" ItemsSource="{Binding Source={StaticResource groupData}}"
                   SelectionMode="None">
@@ -53,5 +52,10 @@
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
+
+        <Grid Margin="20">
+            <TextBlock Text="Premier League" Style="{StaticResource PageHeaderTextStyle}"/>
+        </Grid>
+
     </Grid>
 </Page>
