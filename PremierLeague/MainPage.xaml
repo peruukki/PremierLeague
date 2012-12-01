@@ -8,15 +8,23 @@
     mc:Ignorable="d">
 
     <Grid Style="{StaticResource LayoutRootStyle}">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+                <GradientStop Color="#FF35BB35" Offset="0"/>
+                <GradientStop Color="#FF007A00" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
         <Grid.Resources>
             <CollectionViewSource x:Name="groupData" IsSourceGrouped="true" ItemsPath="Items"/>
         </Grid.Resources>
+
         <Grid.RowDefinitions>
     		<RowDefinition Height="Auto"/>
     		<RowDefinition/>
     	</Grid.RowDefinitions>
 
-        <GridView Grid.Row="1" Margin="20" ItemsSource="{Binding Source={StaticResource groupData}}"
+        <GridView Grid.Row="1" ItemsSource="{Binding Source={StaticResource groupData}}"
                   SelectionMode="None">
 
             <GridView.ItemsPanel>
@@ -29,12 +37,12 @@
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Key}" />
+                            <TextBlock Margin="25,20,20,20" Text="{Binding Key}" Style="{StaticResource SubtitleTextStyle}"/>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
                     <GroupStyle.Panel>
                         <ItemsPanelTemplate>
-                            <VariableSizedWrapGrid Orientation="Vertical" Margin="0,0,40,0"/>
+                            <VariableSizedWrapGrid Orientation="Vertical" Margin="20,0,20,0"/>
                         </ItemsPanelTemplate>
                     </GroupStyle.Panel>
                 </GroupStyle>
@@ -53,8 +61,8 @@
             </GridView.ItemTemplate>
         </GridView>
 
-        <Grid Margin="20">
-            <TextBlock Text="Premier League" Style="{StaticResource PageHeaderTextStyle}"/>
+        <Grid>
+            <TextBlock Margin="20" Text="Premier League" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
 
     </Grid>
