@@ -20,9 +20,9 @@
         </Grid.Resources>
 
         <Grid.RowDefinitions>
-    		<RowDefinition Height="Auto"/>
-    		<RowDefinition/>
-    	</Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
         <GridView Grid.Row="1" ItemsSource="{Binding Source={StaticResource groupData}}"
                   SelectionMode="None">
