@@ -94,7 +94,7 @@
 
         <!-- Page header -->
         <Grid>
-            <TextBlock x:Name="pageTitle" Margin="20" Text="Premier League" Style="{StaticResource PageHeaderTextStyle}"/>
+            <TextBlock x:Name="pageTitle" Margin="20" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
 
         <!-- View state changes -->
