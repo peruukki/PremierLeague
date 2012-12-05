@@ -1,4 +1,5 @@
 ﻿<common:LayoutAwarePage
+    x:Name="pageRoot"
     x:Class="PremierLeague.MainPage"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -16,8 +17,8 @@
         </Grid.Resources>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- Landscape -->
@@ -34,12 +35,12 @@
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Margin="25,20,20,20" Text="{Binding Key}" Style="{StaticResource SubtitleTextStyle}"/>
+                            <TextBlock Margin="39,20,20,20" Text="{Binding Key}" Style="{StaticResource SubtitleTextStyle}"/>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
                     <GroupStyle.Panel>
                         <ItemsPanelTemplate>
-                            <VariableSizedWrapGrid Orientation="Vertical" Margin="20,0,20,0"/>
+                            <VariableSizedWrapGrid Orientation="Vertical" Margin="34,0,20,0"/>
                         </ItemsPanelTemplate>
                     </GroupStyle.Panel>
                 </GroupStyle>
@@ -65,7 +66,7 @@
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Margin="20,5,0,5" Text="{Binding Key}" Style="{StaticResource SubtitleTextStyle}"/>
+                            <TextBlock Margin="37,5,0,5" Text="{Binding Key}" Style="{StaticResource SubtitleTextStyle}"/>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>
@@ -73,7 +74,7 @@
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="20,5,0,0" HorizontalAlignment="Left" Width="150" Height="100">
+                    <Grid Margin="32,5,0,0" HorizontalAlignment="Left" Width="150" Height="100">
                         <Border Background="{StaticResource ListViewItemOverlayBackgroundThemeBrush}">
                             <StackPanel Margin="20,0,0,0" VerticalAlignment="Center">
                                 <TextBlock Text="{Binding Name}" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}"/>
@@ -88,7 +89,7 @@
 
         <!-- Page header -->
         <Grid>
-            <TextBlock x:Name="pageTitle" Margin="20" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
+            <TextBlock x:Name="pageTitle" Margin="36" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
 
         <!-- View state changes -->

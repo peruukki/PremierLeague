@@ -24,7 +24,7 @@
     -->
     <Grid Style="{StaticResource MainStyle}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
+            <RowDefinition Height="120"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
