@@ -9,13 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Style="{StaticResource LayoutRootStyle}">
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
-                <GradientStop Color="#FF35BB35" Offset="0"/>
-                <GradientStop Color="#FF007A00" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
+    <Grid Style="{StaticResource MainStyle}">
 
         <Grid.Resources>
             <CollectionViewSource x:Name="groupData" IsSourceGrouped="true" ItemsPath="Items"/>

@@ -15,6 +15,17 @@
                 <ResourceDictionary Source="Common/StandardStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <Style x:Key="MainStyle" TargetType="Panel" BasedOn="{StaticResource LayoutRootStyle}">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+                            <GradientStop Color="#FF35BB35" Offset="0"/>
+                            <GradientStop Color="#FF007A00" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
             <x:String x:Key="AppName">Premier League</x:String>
         </ResourceDictionary>
     </Application.Resources>
