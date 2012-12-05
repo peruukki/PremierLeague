@@ -28,11 +28,15 @@ namespace PremierLeague
         }
 
         /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
+        /// Populates the page with content passed during navigation.  Any saved state is also
+        /// provided when recreating a page from a prior session.
         /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        /// <param name="navigationParameter">The parameter value passed to
+        /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested.
+        /// </param>
+        /// <param name="pageState">A dictionary of state preserved by this page during an earlier
+        /// session.  This will be null the first time a page is visited.</param>
+        protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
             var teams = new Data.DataSource().Items;
             var result = from t in teams
