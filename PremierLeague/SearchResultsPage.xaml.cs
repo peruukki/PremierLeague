@@ -53,16 +53,12 @@ namespace PremierLeague
             // order to start in an active state.  Results for the active filter are provided
             // in Filter_SelectionChanged below.
             var filterList = new List<Filter>();
-            var allMatches = new List<ISearchResult>();
-            filterList.Add(new Filter("All", allMatches, true));
-
             var source = new DataSource();
 
             var teams = source.Teams;
             var matchingTeams = (from team in teams where team.Name.ToLower().Contains(queryText) select team).ToList<ISearchResult>();
             if (matchingTeams.Count > 0)
             {
-                allMatches.AddRange(matchingTeams);
                 filterList.Add(new Filter("Teams", matchingTeams));
             }
 
@@ -70,14 +66,21 @@ namespace PremierLeague
             var matchingGroups = (from grp in groups where grp.Name.ToLower().Contains(queryText) select grp).ToList<ISearchResult>();
             if (matchingGroups.Count > 0)
             {
-                allMatches.AddRange(matchingGroups);
                 filterList.Add(new Filter("Categories", matchingGroups));
+            }
+
+            if (filterList.Count > 1)
+            {
+                var allMatches = new List<ISearchResult>();
+                allMatches.AddRange(matchingTeams);
+                allMatches.AddRange(matchingGroups);
+                filterList.Insert(0, new Filter("All", allMatches, true));
             }
 
             // Communicate results through the view model
             this.DefaultViewModel["QueryText"] = '\u201c' + queryText + '\u201d';
             this.DefaultViewModel["Filters"] = filterList;
-            this.DefaultViewModel["ShowFilters"] = filterList.Count > 1;
+            this.DefaultViewModel["ShowFilters"] = filterList.Count > 0;
         }
 
         /// <summary>
