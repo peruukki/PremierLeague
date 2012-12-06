@@ -8,6 +8,10 @@
             FFTPrediction = fftPrediction;
         }
 
+        public string Title { get { return Name; } }
+        public string Subtitle { get { return CurrentPositionText; } }
+        public string Description { get { return FFTPredictionText; } }
+
         public string Name { get; private set; }
         public int CurrentPosition { get; set; }
         public int FFTPrediction { get; private set; }

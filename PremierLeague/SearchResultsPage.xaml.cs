@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PremierLeague.Data;
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -40,19 +42,23 @@ namespace PremierLeague
         /// session.  This will be null the first time a page is visited.</param>
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
-            var queryText = navigationParameter as String;
+            var queryText = (navigationParameter as string).ToLower();
 
-            // TODO: Application-specific searching logic.  The search process is responsible for
-            //       creating a list of user-selectable result categories:
+            // Application-specific searching logic.  The search process is responsible for
+            // creating a list of user-selectable result categories:
             //
-            //       filterList.Add(new Filter("<filter name>", <result count>));
+            // filterList.Add(new Filter("<filter name>", <result count>));
             //
-            //       Only the first filter, typically "All", should pass true as a third argument in
-            //       order to start in an active state.  Results for the active filter are provided
-            //       in Filter_SelectionChanged below.
+            // Only the first filter, typically "All", should pass true as a third argument in
+            // order to start in an active state.  Results for the active filter are provided
+            // in Filter_SelectionChanged below.
+            var teams = new DataSource().Teams;
+            var matchingTeams = (from team in teams where team.Name.ToLower().Contains(queryText) select team).ToList();
+            var allMatches = matchingTeams;
 
             var filterList = new List<Filter>();
-            filterList.Add(new Filter("All", 0, true));
+            filterList.Add(new Filter("All", allMatches, true));
+            filterList.Add(new Filter("Teams", matchingTeams));
 
             // Communicate results through the view model
             this.DefaultViewModel["QueryText"] = '\u201c' + queryText + '\u201d';
@@ -75,8 +81,9 @@ namespace PremierLeague
                 // RadioButton representation used when not snapped to reflect the change
                 selectedFilter.Active = true;
 
-                // TODO: Respond to the change in active filter by setting this.DefaultViewModel["Results"]
-                //       to a collection of items with bindable Image, Title, Subtitle, and Description properties
+                // Respond to the change in active filter by setting this.DefaultViewModel["Results"]
+                // to a collection of items with bindable Image, Title, Subtitle, and Description properties
+                this.DefaultViewModel["Results"] = selectedFilter.Matches;
 
                 // Ensure results are found
                 object results;
@@ -115,43 +122,22 @@ namespace PremierLeague
         /// </summary>
         private sealed class Filter : PremierLeague.Common.BindableBase
         {
-            private String _name;
-            private int _count;
-            private bool _active;
-
-            public Filter(String name, int count, bool active = false)
+            public Filter(string name, List<DataItem> matches, bool active = false)
             {
                 this.Name = name;
-                this.Count = count;
+                this.Matches = matches;
                 this.Active = active;
             }
 
-            public override String ToString()
-            {
-                return Description;
-            }
+            public string Name { get; private set; }
+            public List<DataItem> Matches { get; private set; }
+            public int MatchCount { get { return Matches.Count; } }
+            public bool Active { get; set; }
+            public string Description { get { return ToString(); } }
 
-            public String Name
+            public override string ToString()
             {
-                get { return _name; }
-                set { if (this.SetProperty(ref _name, value)) this.OnPropertyChanged("Description"); }
-            }
-
-            public int Count
-            {
-                get { return _count; }
-                set { if (this.SetProperty(ref _count, value)) this.OnPropertyChanged("Description"); }
-            }
-
-            public bool Active
-            {
-                get { return _active; }
-                set { this.SetProperty(ref _active, value); }
-            }
-
-            public String Description
-            {
-                get { return String.Format("{0} ({1})", _name, _count); }
+                return String.Format("{0} ({1})", Name, MatchCount);
             }
         }
     }
