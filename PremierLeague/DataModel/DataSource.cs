@@ -8,38 +8,38 @@ namespace PremierLeague.Data
     {
         public DataSource()
         {
-            Items = new List<DataItem>();
-            Items.Add(new DataItem("Arsenal", 4));
-            Items.Add(new DataItem("Aston Villa", 10));
-            Items.Add(new DataItem("Chelsea", 5));
-            Items.Add(new DataItem("Everton", 8));
-            Items.Add(new DataItem("Fulham", 12));
-            Items.Add(new DataItem("Liverpool", 6));
-            Items.Add(new DataItem("Man City", 1));
-            Items.Add(new DataItem("Man Utd", 2));
-            Items.Add(new DataItem("Newcastle", 7));
-            Items.Add(new DataItem("Norwich", 14));
-            Items.Add(new DataItem("QPR", 13));
-            Items.Add(new DataItem("Reading", 18));
-            Items.Add(new DataItem("Southampton", 17));
-            Items.Add(new DataItem("Stoke", 11));
-            Items.Add(new DataItem("Sunderland", 9));
-            Items.Add(new DataItem("Swansea", 20));
-            Items.Add(new DataItem("Tottenham", 3));
-            Items.Add(new DataItem("West Ham", 15));
-            Items.Add(new DataItem("Wigan", 16));
-            Items.Add(new DataItem("West Brom", 19));
+            Teams = new List<DataItem>();
+            Teams.Add(new DataItem("Arsenal", 4));
+            Teams.Add(new DataItem("Aston Villa", 10));
+            Teams.Add(new DataItem("Chelsea", 5));
+            Teams.Add(new DataItem("Everton", 8));
+            Teams.Add(new DataItem("Fulham", 12));
+            Teams.Add(new DataItem("Liverpool", 6));
+            Teams.Add(new DataItem("Man City", 1));
+            Teams.Add(new DataItem("Man Utd", 2));
+            Teams.Add(new DataItem("Newcastle", 7));
+            Teams.Add(new DataItem("Norwich", 14));
+            Teams.Add(new DataItem("QPR", 13));
+            Teams.Add(new DataItem("Reading", 18));
+            Teams.Add(new DataItem("Southampton", 17));
+            Teams.Add(new DataItem("Stoke", 11));
+            Teams.Add(new DataItem("Sunderland", 9));
+            Teams.Add(new DataItem("Swansea", 20));
+            Teams.Add(new DataItem("Tottenham", 3));
+            Teams.Add(new DataItem("West Ham", 15));
+            Teams.Add(new DataItem("Wigan", 16));
+            Teams.Add(new DataItem("West Brom", 19));
 
             SetCurrentPositions();
         }
 
-        public ICollection<DataItem> Items { get; private set; }
+        public ICollection<DataItem> Teams { get; private set; }
 
         public IEnumerable<object> Groups
         {
             get
             {
-                var result = from t in Items
+                var result = from t in Teams
                              orderby t.PositionDifference descending
                              group t by GetGroupName(t.PositionDifference) into g
                              select new { Key = string.Format("{0} ({1})", g.Key, g.ToList().Count), Items = g };
@@ -82,12 +82,12 @@ namespace PremierLeague.Data
                     "QPR"
                 };
 
-            var teamIndex = 1;
+            var position = 1;
             foreach (var team in leagueTable)
             {
-                var matchingItems = from item in Items where item.Name.Equals(team) select item;
+                var matchingItems = from item in Teams where item.Name.Equals(team) select item;
                 Debug.Assert(matchingItems.ToList().Count == 1);
-                foreach (var item in matchingItems) item.CurrentPosition = teamIndex++;
+                foreach (var item in matchingItems) item.CurrentPosition = position++;
             }
         }
     }
