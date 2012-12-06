@@ -21,10 +21,10 @@ namespace PremierLeague
     /// <summary>
     /// This page displays search results when a global search is directed to this application.
     /// </summary>
-    public sealed partial class SearchResultsPage1 : PremierLeague.Common.LayoutAwarePage
+    public sealed partial class SearchResultsPage : PremierLeague.Common.LayoutAwarePage
     {
 
-        public SearchResultsPage1()
+        public SearchResultsPage()
         {
             this.InitializeComponent();
         }

@@ -139,7 +139,7 @@ namespace PremierLeague
                 }
             }
 
-            frame.Navigate(typeof(SearchResultsPage1), args.QueryText);
+            frame.Navigate(typeof(SearchResultsPage), args.QueryText);
             Window.Current.Content = frame;
 
             // Ensure the current window is active
