@@ -6,6 +6,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:PremierLeague"
     xmlns:common="using:PremierLeague.Common"
+    xmlns:data="using:PremierLeague.Data"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -13,7 +14,8 @@
     <Grid Style="{StaticResource MainStyle}">
 
         <Grid.Resources>
-            <CollectionViewSource x:Name="groupData" IsSourceGrouped="true" ItemsPath="Items"/>
+            <CollectionViewSource x:Name="groupData" IsSourceGrouped="true" ItemsPath="Items"
+                                  d:Source="{Binding Groups, Source={d:DesignInstance Type=data:DataSource, IsDesignTimeCreatable=True}}"/>
         </Grid.Resources>
 
         <Grid.RowDefinitions>

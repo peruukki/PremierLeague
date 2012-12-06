@@ -35,7 +35,28 @@ namespace PremierLeague.Data
 
         public ICollection<DataItem> Items { get; private set; }
 
-        public void SetCurrentPositions()
+        public IEnumerable<object> Groups
+        {
+            get
+            {
+                var result = from t in Items
+                             orderby t.PositionDifference descending
+                             group t by GetGroupName(t.PositionDifference) into g
+                             select new { Key = string.Format("{0} ({1})", g.Key, g.ToList().Count), Items = g };
+                return result;
+            }
+        }
+
+        private string GetGroupName(int difference)
+        {
+            if (difference > 4) return "Fantastic season";
+            else if (difference > 1) return "Exceeding expectations";
+            else if (difference < -4) return "Nightmare season";
+            else if (difference < -1) return "Disappointing";
+            else return "Doing OK";
+        }
+
+        private void SetCurrentPositions()
         {
             string[] leagueTable =
                 {

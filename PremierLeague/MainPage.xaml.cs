@@ -1,4 +1,6 @@
 ﻿using PremierLeague.Common;
+using PremierLeague.Data;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -38,21 +40,7 @@ namespace PremierLeague
         /// session.  This will be null the first time a page is visited.</param>
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
-            var teams = new Data.DataSource().Items;
-            var result = from t in teams
-                         orderby t.PositionDifference descending
-                         group t by GetGroupName(t.PositionDifference) into g
-                         select new { Key = string.Format("{0} ({1})", g.Key, g.ToList().Count), Items = g }; ;
-            groupData.Source = result;
-        }
-
-        private string GetGroupName(int difference)
-        {
-            if (difference > 4) return "Fantastic season";
-            else if (difference > 1) return "Exceeding expectations";
-            else if (difference < -4) return "Nightmare season";
-            else if (difference < -1) return "Disappointing";
-            else return "Doing OK";
+            groupData.Source = new DataSource().Groups;
         }
     }
 }
