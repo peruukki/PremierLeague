@@ -14,7 +14,8 @@
     <Grid Style="{StaticResource MainStyle}">
 
         <Grid.Resources>
-            <CollectionViewSource x:Name="groupData" IsSourceGrouped="true" ItemsPath="Items"
+            <CollectionViewSource x:Name="groupData" IsSourceGrouped="true"
+                                  Source="{Binding Groups}" ItemsPath="Items"
                                   d:Source="{Binding Groups, Source={d:DesignInstance Type=data:DataSource, IsDesignTimeCreatable=True}}"/>
         </Grid.Resources>
 

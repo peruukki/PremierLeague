@@ -40,7 +40,7 @@ namespace PremierLeague
         /// session.  This will be null the first time a page is visited.</param>
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
-            groupData.Source = new DataSource().Groups;
+            this.DefaultViewModel["Groups"] = new DataSource().Groups;
         }
     }
 }
