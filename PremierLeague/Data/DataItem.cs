@@ -1,6 +1,8 @@
-﻿namespace PremierLeague.Data
+﻿using Windows.UI.Xaml.Controls;
+
+namespace PremierLeague.Data
 {
-    public class DataItem
+    public class DataItem : ISearchResult
     {
         public DataItem(string name, int fftPrediction)
         {
@@ -8,9 +10,12 @@
             FFTPrediction = fftPrediction;
         }
 
+        #region ISearchResult
         public string Title { get { return Name; } }
         public string Subtitle { get { return CurrentPositionText; } }
         public string Description { get { return FFTPredictionText; } }
+        public Image Image { get { return null; } }
+        #endregion ISearchResult
 
         public string Name { get; private set; }
         public int CurrentPosition { get; set; }

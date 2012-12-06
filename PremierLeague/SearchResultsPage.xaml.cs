@@ -52,13 +52,27 @@ namespace PremierLeague
             // Only the first filter, typically "All", should pass true as a third argument in
             // order to start in an active state.  Results for the active filter are provided
             // in Filter_SelectionChanged below.
-            var teams = new DataSource().Teams;
-            var matchingTeams = (from team in teams where team.Name.ToLower().Contains(queryText) select team).ToList();
-            var allMatches = matchingTeams;
-
             var filterList = new List<Filter>();
+            var allMatches = new List<ISearchResult>();
             filterList.Add(new Filter("All", allMatches, true));
-            filterList.Add(new Filter("Teams", matchingTeams));
+
+            var source = new DataSource();
+
+            var teams = source.Teams;
+            var matchingTeams = (from team in teams where team.Name.ToLower().Contains(queryText) select team).ToList<ISearchResult>();
+            if (matchingTeams.Count > 0)
+            {
+                allMatches.AddRange(matchingTeams);
+                filterList.Add(new Filter("Teams", matchingTeams));
+            }
+
+            var groups = source.Groups;
+            var matchingGroups = (from grp in groups where grp.Name.ToLower().Contains(queryText) select grp).ToList<ISearchResult>();
+            if (matchingGroups.Count > 0)
+            {
+                allMatches.AddRange(matchingGroups);
+                filterList.Add(new Filter("Categories", matchingGroups));
+            }
 
             // Communicate results through the view model
             this.DefaultViewModel["QueryText"] = '\u201c' + queryText + '\u201d';
@@ -122,7 +136,7 @@ namespace PremierLeague
         /// </summary>
         private sealed class Filter : PremierLeague.Common.BindableBase
         {
-            public Filter(string name, List<DataItem> matches, bool active = false)
+            public Filter(string name, ICollection<ISearchResult> matches, bool active = false)
             {
                 this.Name = name;
                 this.Matches = matches;
@@ -130,7 +144,7 @@ namespace PremierLeague
             }
 
             public string Name { get; private set; }
-            public List<DataItem> Matches { get; private set; }
+            public ICollection<ISearchResult> Matches { get; private set; }
             public int MatchCount { get { return Matches.Count; } }
             public bool Active { get; set; }
             public string Description { get { return ToString(); } }

@@ -35,14 +35,14 @@ namespace PremierLeague.Data
 
         public ICollection<DataItem> Teams { get; private set; }
 
-        public IEnumerable<object> Groups
+        public IEnumerable<DataGroup> Groups
         {
             get
             {
                 var result = from t in Teams
                              orderby t.PositionDifference descending
                              group t by GetGroupName(t.PositionDifference) into g
-                             select new { Key = string.Format("{0} ({1})", g.Key, g.ToList().Count), Items = g };
+                             select new DataGroup(string.Format("{0} ({1})", g.Key, g.ToList().Count), g.ToList());
                 return result;
             }
         }

@@ -109,8 +109,10 @@
     <Compile Include="Common\LayoutAwarePage.cs" />
     <Compile Include="Common\RichTextColumns.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Data\DataGroup.cs" />
     <Compile Include="Data\DataItem.cs" />
     <Compile Include="Data\DataSource.cs" />
+    <Compile Include="Data\ISearchResult.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
