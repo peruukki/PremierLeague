@@ -38,7 +38,7 @@
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Margin="39,20,20,20" Text="{Binding Key}" Style="{StaticResource SubtitleTextStyle}"/>
+                            <TextBlock Margin="39,20,20,20" Text="{Binding Name}" Style="{StaticResource SubtitleTextStyle}"/>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
                     <GroupStyle.Panel>
@@ -69,7 +69,7 @@
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Margin="37,5,0,5" Text="{Binding Key}" Style="{StaticResource SubtitleTextStyle}"/>
+                            <TextBlock Margin="37,5,0,5" Text="{Binding Name}" Style="{StaticResource SubtitleTextStyle}"/>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>
