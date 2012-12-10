@@ -69,7 +69,8 @@ namespace PremierLeague
                 filterList.Add(new Filter("Categories", matchingGroups));
             }
 
-            if (filterList.Count > 1)
+            // Ensure that filters always exist so that Filter_SelectionChanged gets called
+            if (filterList.Count != 1)
             {
                 var allMatches = new List<ISearchResult>();
                 allMatches.AddRange(matchingTeams);
@@ -80,7 +81,7 @@ namespace PremierLeague
             // Communicate results through the view model
             this.DefaultViewModel["QueryText"] = '\u201c' + queryText + '\u201d';
             this.DefaultViewModel["Filters"] = filterList;
-            this.DefaultViewModel["ShowFilters"] = filterList.Count > 0;
+            this.DefaultViewModel["ShowFilters"] = true;
         }
 
         /// <summary>
