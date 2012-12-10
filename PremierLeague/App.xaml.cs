@@ -99,6 +99,7 @@ namespace PremierLeague
             // If the Window isn't already using Frame navigation, insert our own Frame
             var previousContent = Window.Current.Content;
             var frame = previousContent as Frame;
+            var initialLaunch = false;
 
             // If the app does not contain a top-level frame, it is possible that this 
             // is the initial launch of the app. Typically this method and OnLaunched 
@@ -123,9 +124,21 @@ namespace PremierLeague
                         //Assume there is no state and continue
                     }
                 }
+                else
+                {
+                    initialLaunch = true;
+                }
             }
 
-            frame.Navigate(typeof(SearchResultsPage), args.QueryText);
+            if (!string.IsNullOrEmpty(args.QueryText))
+            {
+                frame.Navigate(typeof(SearchResultsPage), args.QueryText);
+            }
+            else if (initialLaunch)
+            {
+                frame.Navigate(typeof(MainPage), args);
+            }
+
             Window.Current.Content = frame;
 
             // Ensure the current window is active
