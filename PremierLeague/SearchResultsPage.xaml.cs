@@ -55,15 +55,13 @@ namespace PremierLeague
             var filterList = new List<Filter>();
             var source = new DataSource();
 
-            var teams = source.Teams;
-            var matchingTeams = (from team in teams where team.Name.ToLower().Contains(queryText) select team).ToList<ISearchResult>();
+            var matchingTeams = source.MatchingTeams(queryText).ToList<ISearchResult>();
             if (matchingTeams.Count > 0)
             {
                 filterList.Add(new Filter("Teams", matchingTeams));
             }
 
-            var groups = source.Groups;
-            var matchingGroups = (from grp in groups where grp.Name.ToLower().Contains(queryText) select grp).ToList<ISearchResult>();
+            var matchingGroups = source.MatchingGroups(queryText).ToList<ISearchResult>();
             if (matchingGroups.Count > 0)
             {
                 filterList.Add(new Filter("Categories", matchingGroups));

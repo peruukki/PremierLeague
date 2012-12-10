@@ -34,6 +34,10 @@ namespace PremierLeague.Data
         }
 
         public ICollection<DataItem> Teams { get; private set; }
+        public IEnumerable<DataItem> MatchingTeams(string queryText)
+        {
+            return from team in Teams where team.Name.ToLower().Contains(queryText) select team;
+        }
 
         public IEnumerable<DataGroup> Groups
         {
@@ -45,6 +49,10 @@ namespace PremierLeague.Data
                              select new DataGroup(string.Format("{0} ({1})", g.Key, g.ToList().Count), g.ToList());
                 return result;
             }
+        }
+        public IEnumerable<DataGroup> MatchingGroups(string queryText)
+        {
+            return from grp in Groups where grp.Name.ToLower().Contains(queryText) select grp;
         }
 
         private string GetGroupName(int difference)

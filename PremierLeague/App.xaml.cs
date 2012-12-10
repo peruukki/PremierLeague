@@ -1,4 +1,5 @@
 ﻿using PremierLeague.Common;
+using PremierLeague.Data;
 
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.IO;
 using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Search;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -53,6 +55,7 @@ namespace PremierLeague
                 rootFrame = new Frame();
                 // Associate the frame with a SuspensionManager key
                 SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
+                InitializeEventHandlers();
 
                 if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
@@ -110,6 +113,7 @@ namespace PremierLeague
                 // a SuspensionManager key
                 frame = new Frame();
                 PremierLeague.Common.SuspensionManager.RegisterFrame(frame, "AppFrame");
+                InitializeEventHandlers();
 
                 if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
@@ -143,6 +147,45 @@ namespace PremierLeague
 
             // Ensure the current window is active
             Window.Current.Activate();
+        }
+
+        private void InitializeEventHandlers()
+        {
+            SearchPane.GetForCurrentView().SuggestionsRequested +=
+                new TypedEventHandler<SearchPane, SearchPaneSuggestionsRequestedEventArgs>(OnSearchPaneSuggestionsRequested);
+        }
+
+        private void OnSearchPaneSuggestionsRequested(SearchPane sender, SearchPaneSuggestionsRequestedEventArgs e)
+        {
+            var queryText = e.QueryText.ToLower();
+            if (string.IsNullOrEmpty(queryText))
+            {
+                return;
+            }
+
+            var maxSuggestions = 5;
+            var request = e.Request;
+            var source = new DataSource();
+
+            var matchingTeams = source.MatchingTeams(queryText);
+            foreach (var team in matchingTeams)
+            {
+                request.SearchSuggestionCollection.AppendQuerySuggestion(team.Name);
+                if (request.SearchSuggestionCollection.Size >= maxSuggestions)
+                {
+                    return;
+                }
+            }
+
+            var matchingGroups = source.MatchingGroups(queryText);
+            foreach (var grp in matchingGroups)
+            {
+                request.SearchSuggestionCollection.AppendQuerySuggestion(grp.Name);
+                if (request.SearchSuggestionCollection.Size >= maxSuggestions)
+                {
+                    return;
+                }
+            }
         }
 
         /// <summary>
