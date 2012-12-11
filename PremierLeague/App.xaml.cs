@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Search;
@@ -45,49 +46,18 @@ namespace PremierLeague
         /// <param name="args">Details about the launch request and process.</param>
         protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-
-            // Do not repeat app initialization when the Window already has content,
-            // just ensure that the window is active
-            if (rootFrame == null)
-            {
-                // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Frame();
-                // Associate the frame with a SuspensionManager key
-                SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
-                InitializeSearchPane();
-
-                if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    // Restore the saved session state only when appropriate
-
-                    try
-                    {
-                        await SuspensionManager.RestoreAsync();
-                    }
-                    catch (SuspensionManagerException)
-                    {
-                        // Something went wrong restoring state.
-                        // Assume there is no state and continue
-                    }
-                }
-
-                // Place the frame in the current Window
-                Window.Current.Content = rootFrame;
-            }
-
-            if (rootFrame.Content == null)
+            var restoreState = (args.PreviousExecutionState == ApplicationExecutionState.Terminated);
+            var frame = await GetRootFrame(restoreState);
+            if (frame.Content == null)
             {
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                if (!rootFrame.Navigate(typeof(MainPage), args.Arguments))
+                if (!frame.Navigate(typeof(MainPage), args.Arguments))
                 {
                     throw new Exception("Failed to create initial page");
                 }
             }
-            // Ensure the current window is active
-            Window.Current.Activate();
         }
 
         /// <summary>
@@ -100,40 +70,9 @@ namespace PremierLeague
             // event in OnWindowCreated to speed up searches once the application is already running
 
             // If the Window isn't already using Frame navigation, insert our own Frame
-            var previousContent = Window.Current.Content;
-            var frame = previousContent as Frame;
-            var initialLaunch = false;
-
-            // If the app does not contain a top-level frame, it is possible that this 
-            // is the initial launch of the app. Typically this method and OnLaunched 
-            // in App.xaml.cs can call a common method.
-            if (frame == null)
-            {
-                // Create a Frame to act as the navigation context and associate it with
-                // a SuspensionManager key
-                frame = new Frame();
-                PremierLeague.Common.SuspensionManager.RegisterFrame(frame, "AppFrame");
-                InitializeSearchPane();
-
-                if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    // Restore the saved session state only when appropriate
-                    try
-                    {
-                        await PremierLeague.Common.SuspensionManager.RestoreAsync();
-                    }
-                    catch (PremierLeague.Common.SuspensionManagerException)
-                    {
-                        //Something went wrong restoring state.
-                        //Assume there is no state and continue
-                    }
-                }
-                else
-                {
-                    initialLaunch = true;
-                }
-            }
-
+            var restoreState = (args.PreviousExecutionState == ApplicationExecutionState.Terminated);
+            var initialLaunch = (Window.Current.Content == null) && !restoreState;
+            var frame = await GetRootFrame(restoreState);
             if (!string.IsNullOrEmpty(args.QueryText))
             {
                 frame.Navigate(typeof(SearchResultsPage), args.QueryText);
@@ -142,11 +81,40 @@ namespace PremierLeague
             {
                 frame.Navigate(typeof(MainPage), args);
             }
+        }
+
+        private async Task<Frame> GetRootFrame(bool restoreState)
+        {
+            var frame = Window.Current.Content as Frame;
+            if (frame == null)
+            {
+                // Create a Frame to act as the navigation context and associate it with
+                // a SuspensionManager key
+                frame = new Frame();
+                SuspensionManager.RegisterFrame(frame, "AppFrame");
+                InitializeSearchPane();
+
+                if (restoreState)
+                {
+                    // Restore the saved session state only when appropriate
+                    try
+                    {
+                        await SuspensionManager.RestoreAsync();
+                    }
+                    catch (SuspensionManagerException)
+                    {
+                        //Something went wrong restoring state.
+                        //Assume there is no state and continue
+                    }
+                }
+            }
 
             Window.Current.Content = frame;
 
             // Ensure the current window is active
             Window.Current.Activate();
+
+            return frame;
         }
 
         private void InitializeSearchPane()
