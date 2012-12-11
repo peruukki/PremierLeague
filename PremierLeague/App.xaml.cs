@@ -151,8 +151,10 @@ namespace PremierLeague
 
         private void InitializeEventHandlers()
         {
-            SearchPane.GetForCurrentView().SuggestionsRequested +=
+            var searchPane = SearchPane.GetForCurrentView();
+            searchPane.SuggestionsRequested +=
                 new TypedEventHandler<SearchPane, SearchPaneSuggestionsRequestedEventArgs>(OnSearchPaneSuggestionsRequested);
+            searchPane.ShowOnKeyboardInput = true;
         }
 
         private void OnSearchPaneSuggestionsRequested(SearchPane sender, SearchPaneSuggestionsRequestedEventArgs e)
