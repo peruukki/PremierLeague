@@ -55,7 +55,7 @@ namespace PremierLeague
                 rootFrame = new Frame();
                 // Associate the frame with a SuspensionManager key
                 SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
-                InitializeEventHandlers();
+                InitializeSearchPane();
 
                 if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
@@ -113,7 +113,7 @@ namespace PremierLeague
                 // a SuspensionManager key
                 frame = new Frame();
                 PremierLeague.Common.SuspensionManager.RegisterFrame(frame, "AppFrame");
-                InitializeEventHandlers();
+                InitializeSearchPane();
 
                 if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
@@ -149,7 +149,7 @@ namespace PremierLeague
             Window.Current.Activate();
         }
 
-        private void InitializeEventHandlers()
+        private void InitializeSearchPane()
         {
             var searchPane = SearchPane.GetForCurrentView();
             searchPane.SuggestionsRequested +=
