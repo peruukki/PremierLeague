@@ -41,6 +41,7 @@ namespace PremierLeague
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
             this.DefaultViewModel["Groups"] = new DataSource().Groups;
+            this.groupGridView.ItemsSource = this.groupData.View.CollectionGroups;
         }
     }
 }

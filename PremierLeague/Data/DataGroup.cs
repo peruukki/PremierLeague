@@ -13,7 +13,7 @@ namespace PremierLeague.Data
 
         #region ISearchResult
         public string Title { get { return Name; } }
-        public string Subtitle { get { return string.Format("{0} teams", Items.Count); } }
+        public string Subtitle { get { return string.Join(", ", Items); } }
         public string Description { get { return ""; } }
         public Image Image { get { return null; } }
         #endregion ISearchResult

@@ -11,56 +11,79 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Style="{StaticResource MainStyle}">
+    <Page.Resources>
+        <CollectionViewSource x:Name="groupData" IsSourceGrouped="true"
+                              Source="{Binding Groups}" ItemsPath="Items"
+                              d:Source="{Binding Groups, Source={d:DesignInstance Type=data:DataSource, IsDesignTimeCreatable=True}}"/>
+    </Page.Resources>
 
-        <Grid.Resources>
-            <CollectionViewSource x:Name="groupData" IsSourceGrouped="true"
-                                  Source="{Binding Groups}" ItemsPath="Items"
-                                  d:Source="{Binding Groups, Source={d:DesignInstance Type=data:DataSource, IsDesignTimeCreatable=True}}"/>
-        </Grid.Resources>
+    <Grid Style="{StaticResource MainStyle}">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="120"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Landscape -->
-        <GridView x:Name="itemGridView" Grid.Row="1" ItemsSource="{Binding Source={StaticResource groupData}}"
-                  SelectionMode="None">
+        <SemanticZoom Grid.Row="1">
 
-            <GridView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </GridView.ItemsPanel>
+            <!-- Landscape -->
+            <SemanticZoom.ZoomedInView>
+                <GridView x:Name="itemGridView" ItemsSource="{Binding Source={StaticResource groupData}}"
+                          SelectionMode="None">
 
-            <GridView.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock Margin="39,20,20,20" Text="{Binding Name}" Style="{StaticResource SubtitleTextStyle}"/>
-                        </DataTemplate>
-                    </GroupStyle.HeaderTemplate>
-                    <GroupStyle.Panel>
+                    <GridView.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <VariableSizedWrapGrid Orientation="Vertical" Margin="34,0,20,0"/>
+                            <VirtualizingStackPanel Orientation="Horizontal"/>
                         </ItemsPanelTemplate>
-                    </GroupStyle.Panel>
-                </GroupStyle>
-            </GridView.GroupStyle>
+                    </GridView.ItemsPanel>
 
-            <GridView.ItemTemplate>
-                <DataTemplate>
-                    <Grid HorizontalAlignment="Left" Width="150" Height="150">
-                        <StackPanel VerticalAlignment="Stretch" Background="{StaticResource ListViewItemOverlayBackgroundThemeBrush}">
-                            <TextBlock Text="{Binding Name}" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Margin="20"/>
-                            <TextBlock Text="{Binding CurrentPosition}" Foreground="{StaticResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap" Margin="20,0,20,0"/>
-                            <TextBlock Text="{Binding FFTPredictionText}" Foreground="{StaticResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap" Margin="20,0,20,0"/>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>
+                    <GridView.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Margin="39,20,20,20" Text="{Binding Name}" Style="{StaticResource SubtitleTextStyle}"/>
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
+                            <GroupStyle.Panel>
+                                <ItemsPanelTemplate>
+                                    <VariableSizedWrapGrid Orientation="Vertical" Margin="34,0,20,0"/>
+                                </ItemsPanelTemplate>
+                            </GroupStyle.Panel>
+                        </GroupStyle>
+                    </GridView.GroupStyle>
+
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Width="150" Height="150">
+                                <StackPanel VerticalAlignment="Stretch" Background="{StaticResource ListViewItemOverlayBackgroundThemeBrush}">
+                                    <TextBlock Text="{Binding Name}" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Margin="20"/>
+                                    <TextBlock Text="{Binding CurrentPosition}" Foreground="{StaticResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap" Margin="20,0,20,0"/>
+                                    <TextBlock Text="{Binding FFTPredictionText}" Foreground="{StaticResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap" Margin="20,0,20,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+            </SemanticZoom.ZoomedInView>
+
+            <SemanticZoom.ZoomedOutView>
+                <GridView x:Name="groupGridView" SelectionMode="None" Margin="30,0">
+
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Width="500">
+                                <StackPanel VerticalAlignment="Stretch" Background="{StaticResource ListViewItemOverlayBackgroundThemeBrush}">
+                                    <TextBlock Text="{Binding Group.Name}" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Margin="20,10"/>
+                                    <TextBlock Text="{Binding Group.Subtitle}" Foreground="{StaticResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextStyle}" Margin="20,0,20,20"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+
+                </GridView>
+            </SemanticZoom.ZoomedOutView>
+
+        </SemanticZoom>
 
         <!-- Portrait -->
         <ListView x:Name="itemListView" Grid.Row="1" ItemsSource="{Binding Source={StaticResource groupData}}"
@@ -112,6 +135,9 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemGridView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="groupGridView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
