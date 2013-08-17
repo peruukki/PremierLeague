@@ -57,11 +57,11 @@ namespace PremierLeague.Data
 
         private string GetGroupName(int difference)
         {
-            if (difference > 4) return "Fantastic season";
-            else if (difference > 1) return "Exceeding expectations";
-            else if (difference < -4) return "Nightmare season";
-            else if (difference < -1) return "Disappointing";
-            else return "Doing OK";
+            if (difference > 4) return "Fantastic";
+            else if (difference > 1) return "Exceeded expectations";
+            else if (difference < -4) return "Nightmare";
+            else if (difference < -1) return "Disappointed";
+            else return "OK";
         }
 
         private void SetCurrentPositions()
@@ -70,21 +70,21 @@ namespace PremierLeague.Data
                 {
                     "Man Utd",
                     "Man City",
-                    "Tottenham",
                     "Chelsea",
-                    "Everton",
                     "Arsenal",
-                    "West Brom",
+                    "Tottenham",
+                    "Everton",
                     "Liverpool",
+                    "West Brom",
                     "Swansea",
-                    "Stoke",
                     "West Ham",
                     "Norwich",
                     "Fulham",
-                    "Sunderland",
-                    "Newcastle",
-                    "Aston Villa",
+                    "Stoke",
                     "Southampton",
+                    "Aston Villa",
+                    "Newcastle",
+                    "Sunderland",
                     "Wigan",
                     "Reading",
                     "QPR"
