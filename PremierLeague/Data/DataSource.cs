@@ -68,26 +68,26 @@ namespace PremierLeague.Data
         {
             string[] leagueTable =
                 {
-                    "Man Utd",
                     "Man City",
-                    "Chelsea",
-                    "Arsenal",
-                    "Tottenham",
+                    "Leicester",
+                    "Man Utd",
                     "Everton",
-                    "Liverpool",
-                    "West Brom",
                     "Swansea",
+                    "Crystal Palace",
                     "West Ham",
+                    "Liverpool",
                     "Norwich",
-                    "Fulham",
-                    "Stoke",
-                    "Southampton",
                     "Aston Villa",
+                    "Arsenal",
+                    "Watford",
+                    "Stoke",
+                    "Tottenham",
                     "Newcastle",
-                    "Sunderland",
-                    "Wigan",
-                    "Reading",
-                    "QPR"
+                    "Chelsea",
+                    "Southampton",
+                    "West Brom",
+                    "Bournemouth",
+                    "Sunderland"
                 };
 
             var position = 1;
