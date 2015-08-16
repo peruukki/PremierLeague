@@ -4,30 +4,30 @@ namespace PremierLeague.Data
 {
     public class DataItem : ISearchResult
     {
-        public DataItem(string name, int fftPrediction)
+        public DataItem(string name, int urheiluSanomatPrediction)
         {
             Name = name;
-            FFTPrediction = fftPrediction;
+            UrheiluSanomatPrediction = urheiluSanomatPrediction;
         }
 
         #region ISearchResult
         public string Title { get { return Name; } }
         public string Subtitle { get { return CurrentPositionText; } }
-        public string Description { get { return FFTPredictionText; } }
+        public string Description { get { return UrheiluSanomatPredictionText; } }
         public Image Image { get { return null; } }
         #endregion ISearchResult
 
         public string Name { get; private set; }
         public int CurrentPosition { get; set; }
-        public int FFTPrediction { get; private set; }
-        public int PositionDifference { get { return FFTPrediction - CurrentPosition; } }
+        public int UrheiluSanomatPrediction { get; private set; }
+        public int PositionDifference { get { return UrheiluSanomatPrediction - CurrentPosition; } }
 
         public string CurrentPositionText { get { return "Pos: " + CurrentPosition; } }
-        public string FFTPredictionText
+        public string UrheiluSanomatPredictionText
         {
             get
             {
-                return string.Format("FFT: {0} ({1})", FFTPrediction,
+                return string.Format("US: {0} ({1})", UrheiluSanomatPrediction,
                     PositionDifference.ToString("+#;-#;0"));
             }
         }
