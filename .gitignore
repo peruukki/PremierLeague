@@ -1,4 +1,4 @@
 *.suo
-PremierLeague/bin
-PremierLeague/obj
+bin/
+obj/
 PremierLeague/*.user

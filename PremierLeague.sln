@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PremierLeague", "PremierLeague\PremierLeague.csproj", "{407be45d-920a-4729-87b6-3be6351089fe}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PremierLeague.Windows", "PremierLeague.Windows\PremierLeague.csproj", "{407be45d-920a-4729-87b6-3be6351089fe}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
