@@ -249,13 +249,17 @@ namespace PremierLeague.Common
             }
             this._layoutAwareControls.Add(control);
 
+#if WINDOWS_APP
             // Set the initial visual state of the control
             VisualStateManager.GoToState(control, DetermineVisualState(ApplicationView.Value), false);
+#endif // WINDOWS_APP
         }
 
         private void WindowSizeChanged(object sender, WindowSizeChangedEventArgs e)
         {
+#if WINDOWS_APP
             this.InvalidateVisualState();
+#endif // WINDOWS_APP
         }
 
         /// <summary>
@@ -282,6 +286,7 @@ namespace PremierLeague.Common
             }
         }
 
+#if WINDOWS_APP
         /// <summary>
         /// Translates <see cref="ApplicationViewState"/> values into strings for visual state
         /// management within the page.  The default implementation uses the names of enum values.
@@ -316,10 +321,11 @@ namespace PremierLeague.Common
                 }
             }
         }
+#endif // WINDOWS_APP
 
-        #endregion
+#endregion
 
-        #region Process lifetime management
+#region Process lifetime management
 
         private String _pageKey;
 
@@ -396,7 +402,7 @@ namespace PremierLeague.Common
         {
         }
 
-        #endregion
+#endregion
 
         /// <summary>
         /// Implementation of IObservableMap that supports reentrancy for use as a default view

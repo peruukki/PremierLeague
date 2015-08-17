@@ -8,7 +8,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+#if WINDOWS_APP
 using Windows.ApplicationModel.Search;
+#endif // WINDOWS_APP
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -60,6 +62,7 @@ namespace PremierLeague
             }
         }
 
+#if WINDOWS_APP
         /// <summary>
         /// Invoked when the application is activated to display search results.
         /// </summary>
@@ -82,6 +85,7 @@ namespace PremierLeague
                 frame.Navigate(typeof(MainPage), args);
             }
         }
+#endif // WINDOWS_APP
 
         private async Task<Frame> GetRootFrame(bool restoreState)
         {
@@ -92,7 +96,9 @@ namespace PremierLeague
                 // a SuspensionManager key
                 frame = new Frame();
                 SuspensionManager.RegisterFrame(frame, "AppFrame");
+#if WINDOWS_APP
                 InitializeSearchPane();
+#endif // WINDOWS_APP
 
                 if (restoreState)
                 {
@@ -117,6 +123,7 @@ namespace PremierLeague
             return frame;
         }
 
+#if WINDOWS_APP
         private void InitializeSearchPane()
         {
             var searchPane = SearchPane.GetForCurrentView();
@@ -157,6 +164,7 @@ namespace PremierLeague
                 }
             }
         }
+#endif // WINDOWS_APP
 
         /// <summary>
         /// Invoked when application execution is being suspended.  Application state is saved
