@@ -59,6 +59,7 @@
                                     <TextBlock Text="{Binding Name}" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Margin="20"/>
                                     <TextBlock Text="{Binding CurrentPositionText}" Foreground="{StaticResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap" Margin="20,0,20,0"/>
                                     <TextBlock Text="{Binding UrheiluSanomatPredictionText}" Foreground="{StaticResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap" Margin="20,0,20,0"/>
+                                    <TextBlock Text="{Binding HelsinginSanomatPredictionText}" Foreground="{StaticResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap" Margin="20,0,20,0"/>
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
@@ -106,6 +107,7 @@
                                 <TextBlock Text="{Binding Name}" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}"/>
                                 <TextBlock Text="{Binding CurrentPosition}" Foreground="{StaticResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap"/>
                                 <TextBlock Text="{Binding UrheiluSanomatPredictionText}" Foreground="{StaticResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap"/>
+                                <TextBlock Text="{Binding HelsinginSanomatPredictionText}" Foreground="{StaticResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap"/>
                             </StackPanel>
                         </Border>
                     </Grid>

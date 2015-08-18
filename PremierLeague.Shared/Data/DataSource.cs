@@ -9,26 +9,26 @@ namespace PremierLeague.Data
         public DataSource()
         {
             Teams = new List<DataItem>();
-            Teams.Add(new DataItem("Arsenal", 2));
-            Teams.Add(new DataItem("Aston Villa", 15));
-            Teams.Add(new DataItem("Bournemouth", 17));
-            Teams.Add(new DataItem("Chelsea", 4));
-            Teams.Add(new DataItem("Crystal Palace", 11));
-            Teams.Add(new DataItem("Everton", 7));
-            Teams.Add(new DataItem("Leicester", 19));
-            Teams.Add(new DataItem("Liverpool", 6));
-            Teams.Add(new DataItem("Man City", 1));
-            Teams.Add(new DataItem("Man Utd", 3));
-            Teams.Add(new DataItem("Newcastle", 14));
-            Teams.Add(new DataItem("Norwich", 16));
-            Teams.Add(new DataItem("Southampton", 8));
-            Teams.Add(new DataItem("Stoke", 9));
-            Teams.Add(new DataItem("Sunderland", 18));
-            Teams.Add(new DataItem("Swansea", 12));
-            Teams.Add(new DataItem("Tottenham", 5));
-            Teams.Add(new DataItem("Watford", 20));
-            Teams.Add(new DataItem("West Ham", 10));
-            Teams.Add(new DataItem("West Brom", 13));
+            Teams.Add(new DataItem("Arsenal", 2, 4));
+            Teams.Add(new DataItem("Aston Villa", 15, 15));
+            Teams.Add(new DataItem("Bournemouth", 17, 18));
+            Teams.Add(new DataItem("Chelsea", 4, 1));
+            Teams.Add(new DataItem("Crystal Palace", 11, 14));
+            Teams.Add(new DataItem("Everton", 7, 7));
+            Teams.Add(new DataItem("Leicester", 19, 16));
+            Teams.Add(new DataItem("Liverpool", 6, 5));
+            Teams.Add(new DataItem("Man City", 1, 2));
+            Teams.Add(new DataItem("Man Utd", 3, 3));
+            Teams.Add(new DataItem("Newcastle", 14, 12));
+            Teams.Add(new DataItem("Norwich", 16, 19));
+            Teams.Add(new DataItem("Southampton", 8, 9));
+            Teams.Add(new DataItem("Stoke", 9, 8));
+            Teams.Add(new DataItem("Sunderland", 18, 17));
+            Teams.Add(new DataItem("Swansea", 12, 10));
+            Teams.Add(new DataItem("Tottenham", 5, 6));
+            Teams.Add(new DataItem("Watford", 20, 20));
+            Teams.Add(new DataItem("West Ham", 10, 11));
+            Teams.Add(new DataItem("West Brom", 13, 13));
 
             SetCurrentPositions();
         }
@@ -55,7 +55,7 @@ namespace PremierLeague.Data
             return from grp in Groups where grp.Name.ToLower().Contains(queryText) select grp;
         }
 
-        private string GetGroupName(int difference)
+        private string GetGroupName(double difference)
         {
             if (difference > 4) return "Fantastic";
             else if (difference > 1) return "Exceeded expectations";
