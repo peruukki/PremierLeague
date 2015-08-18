@@ -70,12 +70,12 @@ namespace PremierLeague.Data
                 {
                     "Man City",
                     "Leicester",
+                    "Liverpool",
                     "Man Utd",
                     "Everton",
                     "Swansea",
                     "Crystal Palace",
                     "West Ham",
-                    "Liverpool",
                     "Norwich",
                     "Aston Villa",
                     "Arsenal",
